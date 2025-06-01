@@ -1,4 +1,4 @@
-exercise part of the Odin project : JS Full Stack. Preview live at
+Exercise part of the Odin project : JS Full Stack. Preview live at
 https://catsalvargh.github.io/The_Odin_Project/01_A_LibraryProject/
 
 Skills:
