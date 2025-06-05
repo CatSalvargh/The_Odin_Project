@@ -6,62 +6,66 @@ const createPlayer = function(pName, marker){
 };
 
 const gameBoard = function() {
-    const player1 = createPlayer('Uno', 'X')
-    const player2 = createPlayer('Uno', 'O')
+    const p1 = createPlayer('player 1', 'X')
+    const p2 = createPlayer('player 2', 'O')
     const squares = document.querySelectorAll('.square')
     const squareList = []
     const squareList2 = []
-    let ticker = 0
+    let ticker = 0;
+    let marker;
 
-    squares.forEach((square) => {
-        square.addEventListener('click', () => {
+    squares.forEach((sq) => {
+        const location = parseInt(sq.dataset.position)
+        sq.addEventListener('click', () => {
             ticker++
-            if(ticker%2 == 0){
-                square.innerHTML = 'X'
-                squareList2.push(gameFlow(square))
+            if(ticker%2 != 0){ 
+                marker = 'X'
+                squareList.push(location)
             } else {
-                square.innerHTML = 'O'
-                squareList.push(gameFlow(square))
+                marker = 'O'
+                squareList2.push(location)
             }
-            if (checkComb(squareList)){
-                console.log('player1 wins')
-            } else if (checkComb(squareList2)){
-                console.log('player2 wins')
+            sq.innerHTML = marker
+
+            if(ticker < 8){
+                if(combo(squareList, '1', ticker)){
+                console.log(`player: 1 wins!`)
+                } else if(combo(squareList2, '2', ticker)){
+                    console.log(`player: 2 wins!`)
+                }   
+            } else {
+                console.log(`Game Over`)
             }
         }); 
 });
 }
 
-const gameFlow = function(sq) {
-        const location = String(sq.dataset.row + sq.dataset.column + sq.dataset.diag)
-        return location
-}
-
-function checkComb(arr) {
-    console.log(arr)
-    //Case 1 - Position 11D1
-    if(arr.length > 2){
-        if(arr.includes('11D1')) {
-            if((arr.includes('120') && arr.includes('13D2')) || (arr.includes('22M') && arr.includes('33D1')) || (arr.includes('210') && arr.includes('31D2')) ) {
-                console.log ('Case 1')
-            }
-        } 
-        //Case 2 - Position 13D2
-        else if(arr.includes('13D2')) {
-            if(arr.includes('22M') && arr.includes('31D2') || arr.includes('230') && arr.includes('33D1') ) {
-                console.log ('Case 2')
-            }
+function combo(arr, playerName, ticker) {
+    //Check possible combinations using the middle position (5) and the 2 diagonal extremes 1 and 9
+    if(arr.length <= 2){
+        return
+    }
+    if(ticker < 8){
+        if(
+            (arr.includes(5) &&
+            ((arr.includes(1) && arr.includes(9) ) ||
+            (arr.includes(2) && arr.includes(8) ) ||
+            (arr.includes(3) && arr.includes(7) ) ||
+            (arr.includes(4) && arr.includes(6) )))  ||
+            
+            (arr.includes(1) &&
+            ((arr.includes(2) && arr.includes(3) ) ||
+            (arr.includes(4) && arr.includes(7) ))) ||
+            
+            (arr.includes(9) &&
+            ((arr.includes(6) && arr.includes(3) ) ||
+            (arr.includes(7) && arr.includes(8) )
+            )) ){
+            return playerName
         }
-        //Case 3 - Position 320
-        else if(arr.includes('320')) {
-            if((arr.includes('22M') && arr.includes('120')) || (arr.includes('31D2') && arr.includes('33D1')) ) {
-                console.log ('Case 3')
-            }
-        } else {
-            console.log('Game Over')
-        }
-    } 
-
+    } else {
+        return false;
+    }
 }
 gameBoard()
 
