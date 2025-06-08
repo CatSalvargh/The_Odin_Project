@@ -7,12 +7,11 @@
     <title>Tick Tack Toe</title>
 </head>
 <body>
-    <div class="game-details">
-
-    </div>
-    
+    <div class="left">
+        <img src="tictactoe_pint.png" alt="A blue and red tic tac toe board game">
+    </div> 
     <div class="container">
-        <h1 class="title">Tick Tac Toe</h1>
+        <h1 class="title">Tic Tac Toe</h1>
         <div class="grid">
         <div class="square sq1" data-position="1"></div>
         <div class="square sq2" data-position="2"></div>
@@ -24,8 +23,28 @@
         <div class="square sq8" data-position="8"></div>
         <div class="square sq9" data-position="9"></div>
         </div>
-        <button class="start" onclick="gameBoard()">Start Game</button>
+        <div class="buttons">
+        <button class="btn start" onclick="startGame()">Start Game</button>
+        <button class="btn restart">Reset Score</button>
+        </div>
+
+        <div class="game-details">
+            <div class="player-X p-details">
+                <label for="p1">Player 1:</label>
+                <input id="p1" type="text" placeholder="Select P1 name">
+                <div id="p1Score" class="score">score: </div>
+            </div>
+            <div class="player-O p-details"> 
+                <label for="p2">Player 2:</label>
+                <input id="p2" type="text" placeholder="Select P2 name">
+                <div id="p2Score" class="score">score:</div>
+            </div>
+        </div>
     </div>
+    <div class="right">
+        <img src="tictactoe_pint.png" alt="A blue and red tic tac toe board game">
+    </div> 
+
     
     <script src="script.js"></script>
 </body>

@@ -1,53 +1,105 @@
-const createPlayer = function(pName, marker){
-    let score = 0
+const createPlayer = function(pName, marker, score){
+    let details = document.querySelector(`.player-${marker}`)
     showScore = () => score;
     increaseScore = () => score++;
-    return {pName, marker, showScore, increaseScore }
+    
+    return {pName, showScore, increaseScore, marker, details }
 };
 
-const gameBoard = function() {
-    const p1 = createPlayer('player 1', 'X')
-    const p2 = createPlayer('player 2', 'O')
+function GameBoard(play1, play2, sc1, sc2) {
     const squares = document.querySelectorAll('.square')
-    const squareList = []
-    const squareList2 = []
+    const p1 = createPlayer(play1, 'X', sc1)
+    const p2 = createPlayer(play2, 'O', sc2)
     let ticker = 0;
-    let marker;
+    let tempScore = [
+        [],
+        []
+    ]
 
-    squares.forEach((sq) => {
+    p1.details.classList.toggle('js-current')
+
+    squares.forEach((sq, i) => {
         const location = parseInt(sq.dataset.position)
         sq.addEventListener('click', () => {
-            ticker++
-            if(ticker%2 != 0){ 
-                marker = 'X'
-                squareList.push(location)
+            
+            //Logic to not double select a position already selected
+            if (sq.innerHTML){
+                return
             } else {
-                marker = 'O'
-                squareList2.push(location)
+                ticker++
+                if(ticker%2 != 0){ 
+                    p2.details.classList.toggle('js-current')
+                    p1.details.classList.remove('js-current')
+                    sq.innerHTML = p1.marker
+                    tempScore[0].push(location)
+                } else {
+                    p1.details.classList.toggle('js-current')
+                    p2.details.classList.remove('js-current')
+                    sq.innerHTML = p2.marker
+                    tempScore[1].push(location)
+                }
             }
-            sq.innerHTML = marker
 
-            if(ticker < 8){
-                if(combo(squareList, '1', ticker)){
-                console.log(`player: 1 wins!`)
-                } else if(combo(squareList2, '2', ticker)){
-                    console.log(`player: 2 wins!`)
-                }   
+            //combo() checks if any player matched 3 in a row/column/diagonal
+            if(ticker >= 9 && (!combo(tempScore[0]) && !combo(tempScore[1]))) {
+                    alert('Game Over')
+                    document.location.reload()
             } else {
-                console.log(`Game Over`)
-            }
-        }); 
-});
+                if(combo(tempScore[0])){
+                    alert(`${p1.pName} wins!`)
+                    p1.increaseScore()
+                    localStorage.setItem('p1Score', `${p1.showScore()}`)
+                    document.location.reload()
+                } else if(combo(tempScore[1])){
+                    alert(`${p2.pName} wins!`)
+                    p2.increaseScore()
+                    localStorage.setItem('p2Score', `${p2.showScore()}`)
+                    document.location.reload() 
+                }
+            }         
+        });
+    });
 }
 
-function combo(arr, playerName, ticker) {
-    //Check possible combinations using the middle position (5) and the 2 diagonal extremes 1 and 9
-    if(arr.length <= 2){
-        return
+function startGame() {
+    let score1 = localStorage.getItem('p1Score')
+    let score2 = localStorage.getItem('p2Score')
+    const p1 = document.getElementById('p1').value
+    const p2 = document.getElementById('p2').value
+    const p1Score = document.getElementById('p1Score')
+    const p2Score = document.getElementById('p2Score')
+
+    if(!p1 || !p2) {
+        alert("Please input players' names")
     }
-    if(ticker < 8){
-        if(
-            (arr.includes(5) &&
+    
+    if (!score1) {
+        p1Score.innerHTML = `score: 0`
+    } else {
+        p1Score.innerHTML = `score: ${score1}`
+    }
+    
+    if (!score2) {
+        p2Score.innerHTML = `score: 0`
+    }  else {
+        p2Score.innerHTML = `score: ${score2}`
+    }
+    GameBoard(p1, p2, score1, score2)
+};
+
+//IIFE to restart score 
+(function restart(){
+    restButton = document.querySelector('.restart')
+    console.log(restButton);
+    restButton.addEventListener('click', function() {
+         localStorage.clear()
+         document.location.reload()
+    })
+})();
+
+function combo(arr) {
+    //checks matching combiantions based on middle, top-left and bottom-right positions
+   if((arr.includes(5) &&
             ((arr.includes(1) && arr.includes(9) ) ||
             (arr.includes(2) && arr.includes(8) ) ||
             (arr.includes(3) && arr.includes(7) ) ||
@@ -61,13 +113,11 @@ function combo(arr, playerName, ticker) {
             ((arr.includes(6) && arr.includes(3) ) ||
             (arr.includes(7) && arr.includes(8) )
             )) ){
-            return playerName
-        }
-    } else {
-        return false;
+        
+        return true
     }
+    return false;
 }
-gameBoard()
 
    
 
