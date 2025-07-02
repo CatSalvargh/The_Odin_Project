@@ -1,0 +1,209 @@
+*, *:before, *:after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    --font-beige: rgb(184, 125, 53);
+    --box-shadow: rgb(218, 210, 203);
+    --header-size: 10vh;
+    --main-size: calc(100vh - var(--header-size))
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+#content {
+    background-color: rgb(218, 210, 203, 25%);
+    width: 90vw;
+    height: var(--main-size);
+    margin: 0 auto;
+    padding: 2vh;
+    overflow: hidden;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    padding: 1.5%
+}
+
+.main_nav {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2rem;
+    height: var(--header-size);
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-right: 10vw;
+}
+
+.main_nav li {
+    height: 35%;
+    width: 150px;
+    background-color: rgba(246, 244, 240, 0.897);
+    text-align: center;
+    align-content: center;
+    box-shadow: 8px 8px 15px var(--box-shadow);
+    color: var(--font-beige);
+    border-radius: 5px;
+
+    & button {
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 5px;
+        font-size: clamp(0.2vw, 20px, 1.25rem);
+        color: steelblue;
+    }
+
+    & button:hover {
+        background: steelblue;
+        color: white;
+        cursor: pointer;
+    }
+}
+
+#image-container {
+    width: 85w;
+    margin: 20px auto;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 10px;
+    padding: 2%;
+}
+
+.image {
+    width: clamp(500px, 20vw, 20rem);
+    height: fit-content;
+    text-align: center;    
+}
+
+.image img {
+    width: 100%;
+    height: auto;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 7px;
+    box-shadow: 2px 2px 5px lightgray;
+}
+
+/* text */
+.large-title {
+    color: steelblue;
+    font-size: 3vw;
+    text-align: center;
+    position: absolute;
+    top: 4vh;
+    left: 10%;
+}
+
+.medium-title {
+    color: steelblue;
+    font-size: 1.8vw;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.intro-text {
+    width: clamp(80vw, 1000px, 20rem);
+    margin: 0 auto;
+    font-size: 1.15rem;
+    line-height: 1.5rem;
+    text-align: justify;
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    color:rgb(53, 51, 48);
+}
+
+h3 {
+    color: var(--font-beige)
+}
+
+/* Form */
+#contact-container {
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 2%;
+}
+
+.contact-details {
+    justify-self: center;
+    border-radius: 15px;
+    width: 50vw;
+    min-width: 300px;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 7px 7px 25px var(--box-shadow),
+        -1px -1px 5px var(--box-shadow);
+    height: fit-content;
+}
+
+#form-title {
+    color: white;
+}
+
+#contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 70vh;
+    color: white;
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    font-size: 1.5em;
+
+    & a {
+        text-decoration: underline steelblue;
+        cursor: pointer;
+        color: steelblue;
+        text-shadow: none;
+    }
+
+    & p {
+        font-size: 15px;
+        color: rgb(77, 77, 77)
+    }
+}
+
+.read-options {
+    display: flex;
+    padding: 1.5rem;
+}
+
+input[type="text"], input[type="email"] {
+    line-height: 3ch;
+}
+
+input[type="checkbox"] {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+textarea {
+    height: 150px;
+}
+
+input[type="submit"] {
+    align-self: center;
+    width: 9rem;
+    height: 3.5vh;
+    background:rgba(216, 215, 212, 0.897);
+    color: gray
+}
+
+input[type="submit"]:hover {
+    background: steelblue;
+    color: white;
+    cursor: pointer;
+}
+
+label {
+    color: white;
+}
+
+input, textarea {
+    border: 1.5px solid steelblue;
+    border: 1px solid white;
+    border-radius: 8px;
+    background: transparent;
+    color: white;
+}
