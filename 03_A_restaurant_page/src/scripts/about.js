@@ -2,7 +2,7 @@ import { img_component, text_generator } from "./support";
 
 const about_text = `
          Welcome to The Blain Bay, where sophistication meets flavor in an unforgettable fine dining experience. 
-         For more than 100 years since the time of Granny Elisse and Grandpa Lui, we have been providing excellence in what we love: Cooking with love and delivering Artworks full of flavour to each table.
+         For more than 100 years since the times of Granny Elisse and Grandpa Lui, we have been providing excellence in what we love: Cooking with true passion and delivering Artworks full of flavour to each table.
          Step into an atmosphere designed for comfort and elegance, perfect for intimate dinners, celebrations, or exclusive group events. From the moment you arrive, our friendly, professional staff ensures impeccable service at every turn, setting the stage for a memorable meal.<br><br>
 
          At The Blain Bay, we believe dining is more than just a meal—it's an experience. Our sophisticated ambiance is complemented by an extensive wine list and expertly crafted cocktails, carefully selected to elevate every course. Whether you're indulging in a multi-course tasting menu or enjoying a casual cocktail hour with friends, each visit promises something new and extraordinary.<br><br>
